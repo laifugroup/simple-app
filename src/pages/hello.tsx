@@ -8,8 +8,9 @@ type Data = {
     name: string
 }
 
-const baseUrl = "http://localhost:3000"
-//const baseUrl = "https://simple-app.newbeexx.com"
+
+const baseUrl = process.env.NEXT_PUBLIC_API_URL
+const secretKey = process.env.SECRET_KEY
 
 //初始获取参数 服务端渲染
 // export async function getServerSideProps() {
@@ -42,7 +43,7 @@ export default function Hello({ initialData }: { initialData: Data }) {
 
 
     useEffect(() => {
-        console.log("useEffect");
+        console.log("useEffect baseUrl=" + baseUrl);
         setTimeout(() => {
             fetchData();
         }, 2000);
@@ -50,13 +51,12 @@ export default function Hello({ initialData }: { initialData: Data }) {
 
     const handleClick = async () => {
         // 发送请求
-        console.log("handleClick")
+        console.log("handleClick baseUrl=" + baseUrl)
         fetchData2()
     }
 
 
     const fetchData = async () => {
-        console.log("useEffect  fetchData");
         const res = await fetch(baseUrl + '/api/hello')
         const body = await res.json()
         body.name = "拉取初始化数据成功."
@@ -66,7 +66,7 @@ export default function Hello({ initialData }: { initialData: Data }) {
     }
 
     const fetchData2 = async () => {
-        const res = await fetch(baseUrl + '/api/hello')
+        const res = await fetch('api/hello')
         const body = await res.json()
         body.name = "点击提交数据成功."
         setData({
