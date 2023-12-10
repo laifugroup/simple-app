@@ -13,15 +13,15 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL
 const secretKey = process.env.SECRET_KEY
 
 //初始获取参数 服务端渲染
-// export async function getServerSideProps() {
-//   const res = await fetch(baseUrl + '/api/hello')
-//   const body = await res.json()
-//   return {
-//     props: {
-//       initialData: body
-//     }
-//   }
-// }
+export async function getServerSideProps() {
+    const res = await fetch(baseUrl + '/api/hello')
+    const body = await res.json()
+    return {
+        props: {
+            initialData: body
+        }
+    }
+}
 
 //静态
 export async function getStaticProps() {
