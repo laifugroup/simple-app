@@ -7,15 +7,15 @@ import React, { useState, useEffect } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
-// export async function getStaticProps() {
-//   const res = await api.info()
-//   const body = await res.json()
-//   return {
-//     props: {
-//       initialData: { body }
-//     }
-//   }
-// }
+export async function getStaticProps() {
+  const res = await api.info()
+  const body = await res.json()
+  return {
+    props: {
+      initialData: { ...body }
+    }
+  }
+}
 
 
 
@@ -26,6 +26,7 @@ export default function UserInfoPage({ initialData }: { initialData: Info }) {
   const info = async () => {
     const res = await api.info()
     const body = await res.json()
+    body.nickName = 'Aa'
     setData({
       ...body,
     })
@@ -35,7 +36,7 @@ export default function UserInfoPage({ initialData }: { initialData: Info }) {
   useEffect(() => {
     setTimeout(() => {
       info()
-    }, 2000);
+    }, 4000);
   }, []);
 
   return (
